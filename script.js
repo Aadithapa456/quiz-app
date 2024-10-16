@@ -60,7 +60,7 @@ function updateQuestion() {
    questionContainer.innerHTML = currentQuestion.question;
    options.forEach((option, index) => {
       const currentOption = ["a", "b", "c", "d"][index];
-      option.innerHTML = currentQuestion[currentOption];
+      option.innerHTML = `<span>${currentOption})</span>${currentQuestion[currentOption]}`;
    });
    i++;
 }
