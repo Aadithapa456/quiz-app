@@ -60,28 +60,8 @@ function updateQuestion() {
    questionContainer.innerHTML = currentQuestion.question;
    options.forEach((option, index) => {
       const currentOption = ["a", "b", "c", "d"][index];
-      option.innerHTML = currentQuestion[currentOption];
+      option.innerHTML = `<span>${currentOption})</span>${currentQuestion[currentOption]}`;
    });
    i++;
 }
 nextBtn.addEventListener("click", updateQuestion);
-// function updateQuestion() {
-//     // Get the first question from the questions array
-//     const currentQuestion = questions[0];
-
-//     // Update the question text
-//     questionContainer.innerHTML = currentQuestion.question;
-
-//     // Update the options
-//     options.forEach((option, index) => {
-//         // Ensure you have an option available for the current index
-//         const letter = ["a", "b", "c", "d"][index]; // Get the option letter (a, b, c, d)
-
-//         // Check if the letter exists in the current question object
-//         if (currentQuestion[letter]) {
-//             option.innerHTML = currentQuestion[letter]; // Access the correct answer using the letter
-//         } else {
-//             option.innerHTML = ""; // If not available, clear the option
-//         }
-//     });
-// }
