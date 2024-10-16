@@ -7,8 +7,13 @@
    --main-bg-color: #e3f2fd;
    --container-bg-color: #fafafa;
    --question-text-color: #37474f;
-   --correct-answer: #6bb56e;
+   --correct-answer: #a5d6a7;
    --incorrect-answer: #e53935;
+   --options-hover: #e0e0e0;
+}
+/* Reusable */
+button {
+   border: none;
 }
 html {
    font-size: 62.5%;
@@ -28,9 +33,16 @@ body {
 }
 .quiz-container {
    max-width: 90%;
+   border-radius: 8px;
    width: 550px;
    background-color: var(--container-bg-color);
    padding: 0.8rem 2.4rem;
+   box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px,
+      rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px,
+      rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px,
+      rgba(42, 51, 70, 0.04) 0px 6px 6px -3px,
+      rgba(14, 63, 126, 0.04) 0px 12px 12px -6px,
+      rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
 }
 .quiz-info {
    color: var(--question-text-color);
@@ -58,24 +70,61 @@ body {
 }
 .quiz-main .quiz-question {
    text-align: center;
-   font-size: 1.8rem;
+   font-size: 2.2rem;
    font-weight: 500;
-   padding: 1rem 0;
+   padding: 1.8rem 0;
 }
 .quiz-main .quiz-options {
    display: grid;
    grid-template-columns: repeat(1, 1fr);
    align-content: center;
    gap: 1rem;
-   margin-top: 1.4rem;
+   margin-top: 2.4rem;
 }
-
-.quiz-options button {
-   margin: 1.4rem 0;
-   display: block;
+.quiz-options div {
    width: 100%;
-   padding: 1.9rem 3rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: #f5f5f5;
+   padding: 1.2rem 3rem;
+   gap: 20px;
+   border-radius: 14px;
+   transition: 0.5s;
+   margin: 1rem 0;
+}
+.quiz-options span {
+   font-size: 1.4rem;
+}
+.quiz-options button {
+   font-family: "Poppins";
+   margin: 1.2rem 0;
+   width: 100%;
    text-align: left;
-   border: none;
-   border-radius: 18px;
+   font-size: 1.6rem;
+   background-color: transparent;
+}
+.quiz-options div:hover {
+   background-color: var(--options-hover);
+}
+.next-btn-area {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 1rem 0;
+   margin: 1.5rem 0;
+}
+.next-btn-area .next-btn {
+   padding: 1.2rem 4.8rem;
+   background-color: #1e88e5;
+   color: white;
+   border-radius: 8px;
+   cursor: pointer;
+   transition: 0.6s;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.next-btn-area .next-btn:hover {
+   background-color: #1976d2;
+   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+   transform: scale(1.05);
 }
