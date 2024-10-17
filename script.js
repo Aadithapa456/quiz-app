@@ -114,7 +114,7 @@ function questions() {
          question:
             "As of 2021, how many Ballon d'Or awards has Lionel Messi won?",
          answers: ["5", "6", "7", "8"],
-         correct: 2,
+         correct: 3,
       },
       {
          question:
