@@ -207,7 +207,10 @@ function updateQuestion() {
 
       // Attaching the click event listener for each new button
       option.addEventListener("click", (event) => {
-         checkAnswer(currentQuestion, index, event);
+         let newOptions = document.querySelectorAll(".quiz-options button");
+         let correctBtn = newOptions[currentQuestion.correct];
+         console.log(correctBtn);
+         checkAnswer(currentQuestion, index, event, correctBtn);
       });
 
       // Appending the new option button to the options container
@@ -220,13 +223,16 @@ function updateQuestion() {
 }
 nextBtn.addEventListener("click", updateQuestion);
 
-function checkAnswer(question, indexOfSelectedAnswer, event) {
-   let clickedBtn = event.target;
+function checkAnswer(question, indexOfSelectedAnswer, selectedBtn, correctBtn) {
+   let clickedBtn = selectedBtn.target;
    if (indexOfSelectedAnswer == question.correct) {
       clickedBtn.classList.add("correct");
       correctAnswerCount++;
    } else {
       clickedBtn.classList.add("incorrect");
+      setTimeout(() => {
+         correctBtn.classList.add("correct");
+      }, 1000);
       incorrectAnswerCount++;
    }
    updateResultCount();
