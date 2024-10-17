@@ -244,7 +244,7 @@ function disableOptions() {
 }
 function quizOver(correct, incorrect) {
    const lowest = Math.round(questions.length / 3);
-   const average = Math.round(questions.length / 2) + 2;
+   const average = Math.round(questions.length / 2) + 1;
    console.log(lowest, average);
    if (correct <= lowest) {
       resultTitle.innerHTML = `<span class="red">You could do Better<span>`;
