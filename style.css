@@ -95,6 +95,7 @@ body {
    background-color: #f5f5f5;
    margin: 1.2rem 0;
    width: 100%;
+   position: relative;
    text-align: left;
    font-size: 1.6rem;
 }
@@ -121,4 +122,56 @@ body {
    background-color: #1976d2;
    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
    transform: scale(1.05);
+}
+/* .correct {
+   position: absolute;
+   top: 0;
+   left: 0;
+   z-index: 10;
+   padding: 1.8rem 3rem;
+   border-radius: 14px;
+   background-color: red;
+}
+
+.correct::before {
+   content: "";
+   background-color: red;
+   width: 100%;
+   height: 40px;
+   position: absolute;
+   top: -20px;
+   left: 0;
+} */
+
+.correct {
+   background-color: #f5f5f5; /* Initial background color */
+   background-image: linear-gradient(to right, #a5d6a7 50%, #f5f5f5 50%);
+   background-size: 200% 100%; /* Ensure the gradient covers more than the button */
+   animation: correctAnimation 1s forwards; /* Run the animation */
+}
+.incorrect {
+   background-color: #f5f5f5; /* Initial background color */
+   background-image: linear-gradient(to right, #e53935 50%, #f5f5f5 50%);
+   background-size: 200% 100%; /* Ensure the gradient covers more than the button */
+   animation: incorrectAnimation 1s forwards; /* Run the animation */
+}
+@keyframes correctAnimation {
+   0% {
+      background-color: #f5f5f5; /* Initial background color */
+      background-position: right; /* Start from left */
+   }
+   100% {
+      background-color: #a5d6a7; /* Final background color */
+      background-position: left; /* End at right */
+   }
+}
+@keyframes incorrectAnimation {
+   0% {
+      background-color: #f5f5f5; /* Initial background color */
+      background-position: right; /* Start from left */
+   }
+   100% {
+      background-color: #e53935; /* Final background color for incorrect */
+      background-position: left; /* End at right */
+   }
 }

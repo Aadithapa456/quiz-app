@@ -65,3 +65,11 @@ function updateQuestion() {
    i++;
 }
 nextBtn.addEventListener("click", updateQuestion);
+let firstOption = document.querySelector(".first-option button");
+firstOption.addEventListener("click", () => {
+   firstOption.classList.add("correct");
+});
+let secondOption = document.querySelector(".second-option button")
+secondOption.addEventListener("click",()=>{
+   secondOption.classList.add("incorrect")
+})
