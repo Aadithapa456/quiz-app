@@ -12,178 +12,515 @@ let resultPopUp = document.querySelector(".pop-up");
 let closePopUpBtn = document.querySelector("#close-btn");
 let resultInfo = document.querySelector(".result-info");
 let resultTitle = document.querySelector(".result-title");
-
+let dropDownContainer = document.querySelector(".dropdown-select-item");
+let mainItem = document.querySelector(".select");
+let options = document.querySelectorAll("#option li");
+dropDownContainer.addEventListener("click", () => {
+   dropDownContainer.classList.toggle("active");
+   document.querySelector(".dropdown-options").classList.toggle("visible");
+});
+options.forEach((option) => {
+   option.addEventListener("click", () => {
+      mainItem.innerHTML = `${option.innerHTML}`;
+   });
+});
+document.addEventListener("click", (e) => {
+   if (!dropDownContainer.contains(e.target)) {
+      dropDownContainer.classList.remove("active"); // Remove active class if clicking outside
+      document.querySelector(".dropdown-options").classList.remove("visible"); // Hide dropdown
+   }
+});
 function questions() {
-   let questionsNormal = [
+   let footballQuestions = [
       {
-         question: "Who tf is the GOAT?",
-         answers: [
-            "Messi",
-            "Lionel Messi",
-            "Lionel Andrés Messi",
-            "Lionel Andrés Messi Cuccitini",
-         ],
+         question: "Who won the FIFA World Cup in 2018?",
+         answers: ["Brazil", "France", "Germany", "Argentina"],
          correct: 1,
       },
       {
-         question: "What is the capital of France?",
-         answers: ["Berlin", "Madrid", "Paris", "Rome"],
-         correct: 2,
-      },
-      {
-         question: "Which planet is known as the Red Planet?",
-         answers: ["Venus", "Mars", "Jupiter", "Saturn"],
-         correct: 1,
-      },
-      {
-         question: "Who wrote the play 'Romeo and Juliet'?",
-         answers: [
-            "Charles Dickens",
-            "Mark Twain",
-            "William Shakespeare",
-            "Leo Tolstoy",
-         ],
-         correct: 2,
-      },
-      {
-         question: "What is the chemical symbol for water?",
-         answers: ["O2", "H2O", "CO2", "H2"],
-         correct: 1,
-      },
-      {
-         question: "What is the powerhouse of the cell?",
-         answers: [
-            "Nucleus",
-            "Mitochondria",
-            "Ribosome",
-            "Endoplasmic Reticulum",
-         ],
-         correct: 1,
-      },
-   ];
-   let questions2 = [
-      {
-         question: "What is the largest mammal in the world?",
-         answers: [
-            "African Elephant",
-            "Blue Whale",
-            "Giraffe",
-            "Humpback Whale",
-         ],
-         correct: 1, // Index of the correct answer
-      },
-      {
-         question: "Which element has the chemical symbol 'Fe'?",
-         answers: ["Gold", "Iron", "Silver", "Lead"],
-         correct: 1,
-      },
-      {
-         question: "What is the capital city of Japan?",
-         answers: ["Beijing", "Seoul", "Tokyo", "Bangkok"],
-         correct: 2,
-      },
-      {
-         question: "Who painted the Mona Lisa?",
-         answers: [
-            "Vincent van Gogh",
-            "Pablo Picasso",
-            "Leonardo da Vinci",
-            "Claude Monet",
-         ],
-         correct: 2,
-      },
-      {
-         question: "What is the smallest prime number?",
-         answers: ["0", "1", "2", "3"],
-         correct: 2,
-      },
-      {
-         question: "What gas do plants absorb from the atmosphere?",
-         answers: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
-         correct: 2,
-      },
-   ];
-   let questions = [
-      {
-         question:
-            "Which club did Cristiano Ronaldo join after leaving Manchester United in 2009?",
-         answers: ["Barcelona", "Juventus", "Real Madrid", "AC Milan"],
-         correct: 2,
-      },
-      {
-         question:
-            "As of 2021, how many Ballon d'Or awards has Lionel Messi won?",
-         answers: ["5", "6", "7", "8"],
-         correct: 3,
-      },
-      {
-         question:
-            "Which player holds the record for the most goals scored in El Clásico?",
+         question: "Which player has the most Ballon d'Or awards?",
          answers: [
             "Cristiano Ronaldo",
             "Lionel Messi",
-            "Alfredo Di Stéfano",
-            "Raúl",
+            "Neymar",
+            "Luka Modrić",
          ],
          correct: 1,
       },
       {
-         question:
-            "In which year did Lionel Messi make his official debut for FC Barcelona?",
-         answers: ["2003", "2004", "2005", "2006"],
+         question: "Which club has won the most UEFA Champions League titles?",
+         answers: ["Barcelona", "Real Madrid", "AC Milan", "Bayern Munich"],
          correct: 1,
       },
       {
          question:
-            "How many times have Barcelona and Real Madrid faced each other in official competitions as of 2021?",
-         answers: ["250", "260", "270", "280"],
-         correct: 1,
-      },
-      {
-         question:
-            "What is the name of the stadium where Barcelona plays its home matches?",
-         answers: ["Santiago Bernabéu", "Old Trafford", "Camp Nou", "San Siro"],
+            "Who is the top scorer in the history of the Premier League?",
+         answers: [
+            "Thierry Henry",
+            "Sergio Agüero",
+            "Alan Shearer",
+            "Wayne Rooney",
+         ],
          correct: 2,
       },
       {
+         question: "Which country has won the most FIFA World Cups?",
+         answers: ["Italy", "Germany", "Argentina", "Brazil"],
+         correct: 3,
+      },
+      {
+         question: "Who scored the famous 'Hand of God' goal?",
+         answers: ["Pelé", "Diego Maradona", "Johan Cruyff", "Zinedine Zidane"],
+         correct: 1,
+      },
+      {
          question:
-            "Who scored the winning goal in the 2011 UEFA Champions League final against Manchester United?",
-         answers: ["Lionel Messi", "Cristiano Ronaldo", "Pedro", "David Villa"],
+            "Which player holds the record for most goals in a single World Cup?",
+         answers: ["Just Fontaine", "Ronaldo", "Gerd Müller", "Pelé"],
+         correct: 0,
+      },
+      {
+         question: "Which team is known as 'The Red Devils'?",
+         answers: ["Liverpool", "Manchester United", "Arsenal", "Chelsea"],
+         correct: 1,
+      },
+      {
+         question: "Who was the top scorer of the 2022 FIFA World Cup?",
+         answers: [
+            "Kylian Mbappé",
+            "Lionel Messi",
+            "Cristiano Ronaldo",
+            "Harry Kane",
+         ],
          correct: 0,
       },
       {
          question:
-            "Which player famously said, 'I am not a robot' after winning the Ballon d'Or?",
+            "What is the nickname of the Brazilian national football team?",
          answers: [
-            "Cristiano Ronaldo",
-            "Lionel Messi",
-            "Ronaldinho",
-            "Zinedine Zidane",
-         ],
-         correct: 1,
-      },
-      {
-         question: "In which year did Ronaldo win his first Ballon d'Or?",
-         answers: ["2006", "2007", "2008", "2009"],
-         correct: 1,
-      },
-      {
-         question: "Who is the all-time leading scorer for FC Barcelona?",
-         answers: ["Samuel Eto'o", "Lionel Messi", "Ronaldinho", "Luis Suárez"],
-         correct: 1,
-      },
-      {
-         question: "Which player has the most assists in El Clásico history?",
-         answers: [
-            "Lionel Messi",
-            "Cristiano Ronaldo",
-            "Xavi Hernández",
-            "Andrés Iniesta",
+            "The Samba Boys",
+            "La Albiceleste",
+            "The Selecao",
+            "Azzurri",
          ],
          correct: 2,
       },
    ];
-   return questions;
+   let football2Questions = [
+      {
+         question:
+            "Who scored the winning goal in the 2014 FIFA World Cup final?",
+         answers: ["Lionel Messi", "Mario Götze", "Neymar", "Mesut Özil"],
+         correct: 1,
+      },
+      {
+         question: "Which country hosted the 2010 FIFA World Cup?",
+         answers: ["Brazil", "Germany", "South Africa", "Spain"],
+         correct: 2,
+      },
+      {
+         question: "Which football club is known as 'The Old Lady'?",
+         answers: ["Juventus", "AC Milan", "Inter Milan", "Napoli"],
+         correct: 0,
+      },
+      {
+         question: "Who won the Ballon d'Or in 2021?",
+         answers: [
+            "Robert Lewandowski",
+            "Lionel Messi",
+            "Karim Benzema",
+            "Mohamed Salah",
+         ],
+         correct: 1,
+      },
+      {
+         question: "Which team did Lionel Messi join in 2021?",
+         answers: [
+            "Manchester City",
+            "Barcelona",
+            "Paris Saint-Germain",
+            "Chelsea",
+         ],
+         correct: 2,
+      },
+      {
+         question:
+            "Who holds the record for the most goals in La Liga history?",
+         answers: [
+            "Cristiano Ronaldo",
+            "Raúl",
+            "Lionel Messi",
+            "Karim Benzema",
+         ],
+         correct: 2,
+      },
+      {
+         question: "Which country won Euro 2020?",
+         answers: ["Italy", "England", "Spain", "Germany"],
+         correct: 0,
+      },
+      {
+         question: "Which player is known as 'O Fenômeno'?",
+         answers: ["Ronaldinho", "Romário", "Pelé", "Ronaldo Nazário"],
+         correct: 3,
+      },
+      {
+         question: "Which Premier League team has the nickname 'The Blues'?",
+         answers: ["Chelsea", "Manchester City", "Everton", "Leicester City"],
+         correct: 0,
+      },
+      {
+         question: "Who won the UEFA Champions League in 2021?",
+         answers: ["Bayern Munich", "Chelsea", "Manchester City", "Liverpool"],
+         correct: 1,
+      },
+   ];
+   let cricketQuestions = [
+      {
+         question: "Who won the ICC Cricket World Cup in 2019?",
+         answers: ["India", "Australia", "England", "New Zealand"],
+         correct: 2,
+      },
+      {
+         question: "Who has the most runs in Test cricket history?",
+         answers: [
+            "Sachin Tendulkar",
+            "Ricky Ponting",
+            "Brian Lara",
+            "Jacques Kallis",
+         ],
+         correct: 0,
+      },
+      {
+         question:
+            "Who holds the record for the fastest century in ODI cricket?",
+         answers: [
+            "AB de Villiers",
+            "Chris Gayle",
+            "Shahid Afridi",
+            "Virat Kohli",
+         ],
+         correct: 0,
+      },
+      {
+         question: "Which team won the inaugural T20 World Cup in 2007?",
+         answers: ["India", "Pakistan", "Australia", "Sri Lanka"],
+         correct: 0,
+      },
+      {
+         question: "Who is the leading wicket-taker in Test cricket?",
+         answers: [
+            "Shane Warne",
+            "Anil Kumble",
+            "James Anderson",
+            "Muttiah Muralitharan",
+         ],
+         correct: 3,
+      },
+      {
+         question: "Which cricketer is known as 'The Wall'?",
+         answers: [
+            "Virat Kohli",
+            "Sachin Tendulkar",
+            "Rahul Dravid",
+            "VVS Laxman",
+         ],
+         correct: 2,
+      },
+      {
+         question: "Which team has won the most ICC Champions Trophy titles?",
+         answers: ["India", "Australia", "South Africa", "West Indies"],
+         correct: 0,
+      },
+      {
+         question:
+            "Who is the captain of the Indian cricket team in all three formats (as of 2021)?",
+         answers: ["Rohit Sharma", "Virat Kohli", "MS Dhoni", "KL Rahul"],
+         correct: 1,
+      },
+      {
+         question:
+            "Which player has hit the most sixes in international cricket?",
+         answers: ["Chris Gayle", "Rohit Sharma", "Shahid Afridi", "MS Dhoni"],
+         correct: 0,
+      },
+      {
+         question:
+            "Who is the only player to score 100 international centuries?",
+         answers: [
+            "Brian Lara",
+            "Ricky Ponting",
+            "Sachin Tendulkar",
+            "Virat Kohli",
+         ],
+         correct: 2,
+      },
+   ];
+   let f1Questions = [
+      {
+         question:
+            "Who holds the record for the most Formula 1 World Championships?",
+         answers: [
+            "Michael Schumacher",
+            "Lewis Hamilton",
+            "Ayrton Senna",
+            "Sebastian Vettel",
+         ],
+         correct: 1,
+      },
+      {
+         question: "Which team has the most Constructors' Championships?",
+         answers: ["Ferrari", "Mercedes", "Red Bull", "McLaren"],
+         correct: 0,
+      },
+      {
+         question: "Which driver won the F1 World Championship in 2020?",
+         answers: [
+            "Max Verstappen",
+            "Lewis Hamilton",
+            "Valtteri Bottas",
+            "Charles Leclerc",
+         ],
+         correct: 1,
+      },
+      {
+         question: "Who is known as 'The Iceman' in Formula 1?",
+         answers: [
+            "Niki Lauda",
+            "Kimi Räikkönen",
+            "Ayrton Senna",
+            "Fernando Alonso",
+         ],
+         correct: 1,
+      },
+      {
+         question: "Which Grand Prix is held at the Circuit de Monaco?",
+         answers: ["Italian GP", "Spanish GP", "Monaco GP", "French GP"],
+         correct: 2,
+      },
+      {
+         question: "Which F1 team is also known as the 'Silver Arrows'?",
+         answers: ["Ferrari", "Mercedes", "Red Bull", "Williams"],
+         correct: 1,
+      },
+      {
+         question: "Who was the youngest driver to win a Formula 1 race?",
+         answers: [
+            "Sebastian Vettel",
+            "Max Verstappen",
+            "Lewis Hamilton",
+            "Charles Leclerc",
+         ],
+         correct: 1,
+      },
+      {
+         question: "Which country hosts the Suzuka Grand Prix?",
+         answers: ["China", "Japan", "Malaysia", "Singapore"],
+         correct: 1,
+      },
+      {
+         question: "Which driver has the most wins in the Monaco Grand Prix?",
+         answers: [
+            "Ayrton Senna",
+            "Lewis Hamilton",
+            "Michael Schumacher",
+            "Niki Lauda",
+         ],
+         correct: 0,
+      },
+      {
+         question: "Who won the 2021 F1 World Championship?",
+         answers: [
+            "Lewis Hamilton",
+            "Max Verstappen",
+            "Charles Leclerc",
+            "Valtteri Bottas",
+         ],
+         correct: 1,
+      },
+   ];
+   let literatureQuestions = [
+      {
+         question: "Who wrote 'Pride and Prejudice'?",
+         answers: [
+            "Charlotte Brontë",
+            "Emily Brontë",
+            "Jane Austen",
+            "George Eliot",
+         ],
+         correct: 2,
+      },
+      {
+         question: "Which novel begins with the line 'Call me Ishmael'?",
+         answers: ["Moby-Dick", "The Great Gatsby", "1984", "Ulysses"],
+         correct: 0,
+      },
+      {
+         question: "Who is the author of 'The Catcher in the Rye'?",
+         answers: [
+            "F. Scott Fitzgerald",
+            "J.D. Salinger",
+            "Ernest Hemingway",
+            "George Orwell",
+         ],
+         correct: 1,
+      },
+      {
+         question: "What is the title of the epic poem written by Homer?",
+         answers: ["The Iliad", "Paradise Lost", "Beowulf", "Divine Comedy"],
+         correct: 0,
+      },
+      {
+         question: "Who wrote 'The Great Gatsby'?",
+         answers: [
+            "Ernest Hemingway",
+            "F. Scott Fitzgerald",
+            "William Faulkner",
+            "John Steinbeck",
+         ],
+         correct: 1,
+      },
+      {
+         question: "Which play is often referred to as the 'Scottish Play'?",
+         answers: ["Macbeth", "Othello", "Hamlet", "King Lear"],
+         correct: 0,
+      },
+      {
+         question: "Who wrote the play 'Death of a Salesman'?",
+         answers: [
+            "Tennessee Williams",
+            "Arthur Miller",
+            "Edward Albee",
+            "David Mamet",
+         ],
+         correct: 1,
+      },
+      {
+         question: "Who is the author of the Harry Potter series?",
+         answers: [
+            "J.R.R. Tolkien",
+            "C.S. Lewis",
+            "J.K. Rowling",
+            "Philip Pullman",
+         ],
+         correct: 2,
+      },
+      {
+         question: "Which of the following is a novel by Leo Tolstoy?",
+         answers: [
+            "Crime and Punishment",
+            "War and Peace",
+            "Anna Karenina",
+            "Both B and C",
+         ],
+         correct: 3,
+      },
+      {
+         question:
+            "What is the name of the protagonist in George Orwell's '1984'?",
+         answers: ["Winston Smith", "Big Brother", "O'Brien", "Julia"],
+         correct: 0,
+      },
+   ];
+   let architectureQuestions = [
+      {
+         question: "Who designed the Guggenheim Museum in New York?",
+         answers: [
+            "Frank Gehry",
+            "Zaha Hadid",
+            "Frank Lloyd Wright",
+            "Le Corbusier",
+         ],
+         correct: 2,
+      },
+      {
+         question: "The Eiffel Tower was designed by which architect?",
+         answers: [
+            "Gustave Eiffel",
+            "Antoni Gaudí",
+            "I. M. Pei",
+            "Renzo Piano",
+         ],
+         correct: 0,
+      },
+      {
+         question: "Which famous building is located in Agra, India?",
+         answers: ["Red Fort", "Taj Mahal", "Lotus Temple", "Qutub Minar"],
+         correct: 1,
+      },
+      {
+         question: "Who is considered the pioneer of modern architecture?",
+         answers: [
+            "Ludwig Mies van der Rohe",
+            "Frank Lloyd Wright",
+            "Le Corbusier",
+            "Walter Gropius",
+         ],
+         correct: 2,
+      },
+      {
+         question: "Which architect is known for designing Fallingwater?",
+         answers: [
+            "Frank Gehry",
+            "Louis Kahn",
+            "Frank Lloyd Wright",
+            "Eero Saarinen",
+         ],
+         correct: 2,
+      },
+      {
+         question: "The Colosseum is located in which city?",
+         answers: ["Athens", "Rome", "Paris", "Istanbul"],
+         correct: 1,
+      },
+      {
+         question: "Which building is known as 'The Shard'?",
+         answers: [
+            "A skyscraper in London",
+            "A museum in Paris",
+            "A cathedral in Milan",
+            "A tower in Dubai",
+         ],
+         correct: 0,
+      },
+      {
+         question:
+            "Which style of architecture is the Notre-Dame Cathedral known for?",
+         answers: ["Gothic", "Baroque", "Neoclassical", "Renaissance"],
+         correct: 0,
+      },
+      {
+         question: "Which architect designed the Sydney Opera House?",
+         answers: ["Renzo Piano", "Norman Foster", "Jørn Utzon", "I. M. Pei"],
+         correct: 2,
+      },
+      {
+         question: "Which architect is associated with the Bauhaus movement?",
+         answers: [
+            "Walter Gropius",
+            "Frank Lloyd Wright",
+            "Ludwig Mies van der Rohe",
+            "Alvar Aalto",
+         ],
+         correct: 0,
+      },
+   ];
+   let category = mainItem.innerHTML.trim();
+   if (category == "Football") {
+      return footballQuestions;
+   } else if (category == "Football 2") {
+      return football2Questions;
+   } else if (category == "Cricket") {
+      return cricketQuestions;
+   } else if (category == "F1") {
+      return f1Questions;
+   } else if (category == "Literature") {
+      return literatureQuestions;
+   } else if (category == "Architecture") {
+      return architectureQuestions;
+   } else {
+      alert("Error");
+   }
 }
 
 function updateQuestion() {

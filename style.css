@@ -35,6 +35,80 @@ body {
    align-items: center;
    background-color: var(--main-bg-color);
 }
+/* Dropdown Styling */
+.dropdown-container {
+   top: 20px;
+   right: 60px;
+   position: absolute;
+   font-family: "Poppins";
+   user-select: none;
+}
+.dropdown-select-item {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 14px;
+   background-color: var(--container-bg-color);
+   padding: 1rem 3.4rem;
+   font-size: 1.4rem;
+   border-radius: 6px;
+   position: relative;
+   z-index: 1;
+   transition: 0.6s;
+   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+   cursor: pointer;
+}
+.select {
+   width: 13rem;
+}
+i {
+   transition: 0.5s;
+}
+.dropdown-select-item.active i {
+   transform: rotate(-180deg);
+}
+.dropdown-select-item:hover {
+   background-color: #ebeaea;
+}
+.dropdown-options.visible {
+   animation: fly-in 0.5s forwards;
+   display: block !important;
+}
+@keyframes fly-in {
+   from {
+      transform: translateY(-10px); /* Start slightly above */
+      opacity: 0; /* Fully transparent */
+   }
+   to {
+      transform: translateY(0); /* End at original position */
+      opacity: 1; /* Fully visible */
+   }
+}
+.dropdown-options {
+   background-color: var(--container-bg-color);
+   padding: 1rem 2.4rem;
+   margin-top: 1rem;
+   border-radius: 6px;
+   display: none;
+   position: absolute;
+   width: 100%;
+   box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+}
+.dropdown-options ul li {
+   font-size: 1.3rem;
+   padding: 0.8rem 2.2rem;
+   transition: 0.6s;
+   background-color: transparent;
+   border-radius: 12px;
+   margin: 1.2rem 0;
+}
+.dropdown-options ul li:hover {
+   background-color: #e0e0e0;
+}
+ul {
+   list-style-type: none;
+}
+/* Dropdown Styling Ends  */
 .separator {
    background-color: #e2e2e2;
    max-width: 90%;
@@ -186,7 +260,7 @@ body {
    display: none;
    padding: 3rem 2rem;
    border-radius: 20px;
-   background-color: #fefefe;
+   background-color: var(--container-bg-color);
    border-radius: 20px;
    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
    color: black;
