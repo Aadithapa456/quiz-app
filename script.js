@@ -18,6 +18,8 @@ let optionsContainer = document.querySelector(".quiz-options");
 let currentQuestionIndex = 0;
 let correctAnswerCount = 0;
 let incorrectAnswerCount = 0;
+let isGameOver = false;
+let isDropdownDisabled = false;
 //Result Popup
 let resultPopUp = document.querySelector(".pop-up");
 let closePopUpBtn = document.querySelector("#close-btn");
@@ -27,12 +29,31 @@ let dropDownContainer = document.querySelector(".dropdown-select-item");
 let mainItem = document.querySelector(".select");
 let options = document.querySelectorAll("#option li");
 dropDownContainer.addEventListener("click", () => {
-   dropDownContainer.classList.toggle("active");
-   document.querySelector(".dropdown-options").classList.toggle("visible");
+   if (isDropdownDisabled) {
+      resultTitle.innerHTML = `<span class = "red">Error!</span>`;
+      resultInfo.innerHTML = `Complete the game first`;
+      showPopUp();
+   } else {
+      toggleDropDown();
+   }
 });
+function toggleDropDown() {
+   if (!isDropdownDisabled) {
+      dropDownContainer.classList.toggle("active");
+      document.querySelector(".dropdown-options").classList.toggle("visible");
+   }
+}
+function disableDropdown() {
+   isDropdownDisabled = true;
+   dropDownContainer.classList.remove("active"); // Hide dropdown options
+   document.querySelector(".dropdown-options").classList.remove("visible"); // Ensure options are hidden
+}
 options.forEach((option) => {
    option.addEventListener("click", () => {
       mainItem.innerHTML = `${option.innerHTML}`;
+      if (!isGameOver) {
+         disableDropdown();
+      }
    });
 });
 document.addEventListener("click", (e) => {
@@ -61,10 +82,13 @@ function questions() {
       showPopUp();
    }
 }
-
+function playAgain() {
+   currentQuestionIndex = 0;
+}
 function updateQuestion() {
    if (currentQuestionIndex >= questions().length) {
       quizOver(correctAnswerCount, incorrectAnswerCount);
+      playAgain();
       return;
    }
    let currentQuestion = questions()[currentQuestionIndex];
@@ -126,7 +150,7 @@ function disableOptions() {
 }
 function quizOver(correct, incorrect) {
    const lowest = Math.round(questions.length / 3);
-   const average = Math.round(questions.length / 2) + 1;
+   const average = Math.round(questions.length / 2);
    console.log(lowest, average);
    if (correct <= lowest) {
       resultTitle.innerHTML = `<span class="red">You could do Better<span>`;
@@ -135,7 +159,9 @@ function quizOver(correct, incorrect) {
    } else {
       resultTitle.innerHTML = `<span class="green">GG</span>`;
    }
-   resultInfo.innerHTML = `Correct : ${correct} <br><br> Incorrect: ${incorrect}`;
+   resultInfo.innerHTML = `Correct : ${correct} <br><br> Incorrect: ${incorrect} <br><br> <div class = "small-text"> Click next to play Again</div>`;
+   isGameOver = true;
+   isDropdownDisabled = false;
    showPopUp();
 }
 function showPopUp() {
@@ -143,7 +169,7 @@ function showPopUp() {
       resultPopUp.style.display = "flex";
       resultPopUp.classList.add("fly-in");
       resultPopUp.classList.remove("fly-out");
-   }, 800);
+   }, 600);
 }
 closePopUpBtn.addEventListener("click", () => {
    resultPopUp.classList.remove("fly-in");
