@@ -149,8 +149,8 @@ function disableOptions() {
    });
 }
 function quizOver(correct, incorrect) {
-   const lowest = Math.round(questions.length / 3);
-   const average = Math.round(questions.length / 2);
+   const lowest = Math.round(questions().length * 0.33);
+   const average = Math.round(questions().length * 0.6);
    console.log(lowest, average);
    if (correct <= lowest) {
       resultTitle.innerHTML = `<span class="red">You could do Better<span>`;
